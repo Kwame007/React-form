@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import User from "./Component/User";
+
+const user = [
+  {
+    fullName: "Will Smith",
+    phone: "+23355434323",
+    location: "Spintex",
+    id: Math.random(),
+  },
+];
 
 function App() {
+  const [newUser, setNewUser] = useState(user);
+  const onSubmitHandler = (data) => {
+    setNewUser((prevState) => {
+      return [data, ...prevState];
+    });
+    console.log(newUser);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <User user={newUser} onSubmit={onSubmitHandler} />
     </div>
   );
 }
